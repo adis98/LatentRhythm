@@ -9,8 +9,11 @@ __pycache__/
 # Distribution / packaging
 .Python
 build/
+.idea/
+.DS_Store/
 develop-eggs/
 dist/
+datasets/
 downloads/
 eggs/
 .eggs/
