@@ -10,7 +10,7 @@ __pycache__/
 .Python
 build/
 .idea/
-.DS_Store/
+.DS_Store
 develop-eggs/
 dist/
 datasets/
