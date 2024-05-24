@@ -42,7 +42,7 @@ def generate(output_directory,
     """
 
     # generate experiment (local) path
-    local_path = "T{}_beta0{}_betaT{}".format(diffusion_config["T"],
+    local_path = "T{}_beta0:{}_betaT:{}".format(diffusion_config["T"],
                                               diffusion_config["beta_0"],
                                               diffusion_config["beta_T"])
 

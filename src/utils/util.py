@@ -155,7 +155,19 @@ def sampling(net, size, diffusion_hyperparams, cond, mask, only_generate_missing
             x = (x - (1 - Alpha[t]) / torch.sqrt(1 - Alpha_bar[t]) * epsilon_theta) / torch.sqrt(Alpha[t])
             if t > 0:
                 x = x + Sigma[t] * std_normal(size)  # add the variance term to x_{t-1}
+            if t == 0 and only_generate_missing == 1:
+                # bias correction
+                true = cond * mask.float()
+                pred = x * mask.float()
+                bias = (true - pred)
+                indices = mask == 1
+                bias_filtered = bias[indices].reshape(bias.shape[0], bias.shape[1], -1)
+                bias_filtered = bias_filtered.mean(axis = 2)
+                bias = bias_filtered.unsqueeze(-1)
+                #x = x * (1 - mask).float() + cond * mask.float()
 
+               # bias correction
+                x = (x + bias)*(1-mask).float() + cond * mask.float()
     return x
 
 
